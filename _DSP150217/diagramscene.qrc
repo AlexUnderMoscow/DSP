@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/pointer.png</file>
+        <file>images/linepointer.png</file>
+        <file>images/textpointer.png</file>
+        <file>images/bold.png</file>
+        <file>images/italic.png</file>
+        <file>images/underline.png</file>
+        <file>images/floodfill.png</file>
+        <file>images/bringtofront.png</file>
+        <file>images/delete.png</file>
+        <file>images/sendtoback.png</file>
+        <file>images/linecolor.png</file>
+        <file>images/background1.png</file>
+        <file>images/background2.png</file>
+        <file>images/background3.png</file>
+        <file>images/background4.png</file>
+        <file>images/ledon.png</file>
+        <file>images/play.png</file>
+        <file>images/stop-24.png</file>
+        <file>images/cdtoparent.png</file>
+        <file>images/btn_next_green.png</file>
+        <file>images/floppy-32.png</file>
+        <file>images/open.png</file>
+        <file>images/artsfftscope.png</file>
+        <file>images/bitgen.png</file>
+        <file>images/image4.png</file>
+        <file>images/image5.png</file>
+        <file>images/image6.png</file>
+        <file>images/4qam.png</file>
+        <file>images/xor.png</file>
+    </qresource>
+</RCC>
