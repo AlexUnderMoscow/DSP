@@ -26,9 +26,7 @@ IQdem::IQdem(QDialog *parent, marray** _arr, unsigned int *_size)
 
 IQdem::~IQdem()
 {
-//	delete work;
-//	if (dlg!=NULL) delete dlg;
-//	if (pdw!=NULL) delete pdw;
+
 }
 
 void IQdem::update()

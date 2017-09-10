@@ -16,7 +16,6 @@ Interface::Interface(QDialog *parent)
         groupManager = new QtGroupPropertyManager();
         flagManager = new QtFlagPropertyManager();
         subBoolManager = new QtBoolPropertyManager();
-
         checkBoxFactory = new QtCheckBoxFactory();
         spinBoxFactory = new QtSpinBoxFactory();
         lineEditFactory = new QtLineEditFactory();

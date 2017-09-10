@@ -10,8 +10,6 @@ fileClass::fileClass(QDialog *parent,marray** _arr, unsigned int *_size)
 	widgetAddr = (void*)work;
 	form = this;
 	timer = new QTimer(this);
-//	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-//	timer->start(1000);
 	MODpixmap.load(":/images/open.png");
 	connect(ui.bOpen,SIGNAL(clicked()),this,SLOT(getFilePath()));	
 	createButton(this);
@@ -34,6 +32,5 @@ void fileClass::getFilePath()
 
 void fileClass::update()
 {
-// 	QString s;
-// 	if (output.size()!=0) ui.labBufLoad->setText(s.setNum(output.at(0)->load()));
+
 }

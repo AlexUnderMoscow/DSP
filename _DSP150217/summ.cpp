@@ -9,7 +9,6 @@ summ::summ(QDialog *parent,marray** _arr, unsigned int *_size)
 	type = Summ;
 	work = new summWork((void*)this,&ui);
 	connect(ui.comboKbytes,SIGNAL(currentIndexChanged(QString)),this,SLOT(indexChanged(QString)));
-//	connect(ui.checkSpectrum,SIGNAL(clicked()),this,SLOT(spectrumShow()));
 	widgetAddr = (void*)work;
 	form = this;
 	timer = new QTimer(this);
@@ -69,15 +68,12 @@ void summ::spectrumShow()
 
 		dlg = new QDialog();
 		sw = new spectrumWidget(dlg,(short*)work->result,1024*1024);
-		//sw->setGeometry(0,0,600,450);
 		dlg->setGeometry(100,100,600,450);
 		dlg->setModal(false);
 		dlg->setWindowTitle(QString::fromUtf8("Спектр"));
 		dlg->show();
 		sptime=new QTimer();
-		//sptime->setInterval(100);
-		//sptime->start();
-		//connect(sptime,SIGNAL(timeout()),sw,SLOT(update()));
+
 	}
 	else
 	{  //закрытие формы FFT
@@ -86,7 +82,6 @@ void summ::spectrumShow()
 		dlg->close();
 		delete sw;
 		dlg=NULL;
-
 		delete sptime;
 	}
 }

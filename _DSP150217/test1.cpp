@@ -8,8 +8,6 @@ test1::test1(QDialog *parent,marray** _arr, unsigned int *_size)
 	MODpixmap.load(":/images/linecolor.png");
 	type = test1mod;
 	work = new test1Work((void*)this,&ui);
-//	connect(ui.comboKbytes,SIGNAL(currentIndexChanged(QString)),this,SLOT(indexChanged(QString)));
-//	connect(ui.checkSpectrum,SIGNAL(clicked()),this,SLOT(spectrumShow()));
 	widgetAddr = (void*)work;
 	form = this;
     timer = new QTimer(this);

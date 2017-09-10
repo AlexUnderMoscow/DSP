@@ -8,7 +8,6 @@ class COperations
 public:
 	COperations();
 	~COperations();
-
 	//unsigned char FastRazvorot(unsigned char a);//быстрый разворот байт
 	//short FastRazvorot(short a);//быстрый разворот байт
 	//unsigned int Razvorot(unsigned int a);

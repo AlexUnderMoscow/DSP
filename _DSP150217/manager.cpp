@@ -13,10 +13,7 @@ Manager::Manager(QObject *parent,DiagramScene* _scene,marray** _arr, unsigned in
 
 Manager::~Manager()
 {
-	//stopProcessing();
-/*	if (matrix!=NULL)
-		delete [] matrix;
-	if (pool!=NULL)	delete pool;*/
+
 }
 void Manager::initMatrix()
 {

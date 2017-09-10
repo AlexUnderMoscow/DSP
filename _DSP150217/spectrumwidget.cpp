@@ -100,25 +100,13 @@ spectrumWidget::spectrumWidget(QWidget *parent, short* _pcm, int _size)
 	pcm = _pcm;
 	size = _size;
 	k_zoom = 10;
-	//setCursor(Qt::CrossCursor);
-	//resize(x, y);
-
 	step =0;
 	counts=0;
 	period = quantums / periods;
 	
 	/**/
-
-//	temp.clear();
-//	for (int i=0;i<PTS/2;i++)  ///?
-//	{
-//		temp.push_back(0);
-//	}
-
-
 	time = new QTimer();
 	time->setInterval(50);
-
 	time->start();
 	cp=new QCustomPlot(parent);
 	cp->setGeometry(0,0,1200,350);
@@ -145,8 +133,6 @@ spectrumWidget::spectrumWidget(QWidget *parent, short* _pcm, int _size)
 		  masVec[7].push_back(0);
 	       dfourier.push_back(0);
 	  }
-
-
 }
 
 void spectrumWidget::timeoutRepaint()
@@ -171,7 +157,7 @@ void spectrumWidget::timeoutRepaint()
     for (unsigned int i = 0; i<masVec[0].size();i++)
     {
         dfourier[i]=(double)(20*log10((masVec[0].at(i)+masVec[1].at(i)+masVec[2].at(i)+masVec[3].at(i)+
-            masVec[4].at(i)+masVec[5].at(i)+masVec[6].at(i)+masVec[7].at(i) )/8))-160;
+        masVec[4].at(i)+masVec[5].at(i)+masVec[6].at(i)+masVec[7].at(i) )/8))-160;
     }
 
     /**/

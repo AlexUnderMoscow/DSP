@@ -11,7 +11,6 @@ class Paint : public QWidget
 public:
 	Paint(QWidget *parent, QPixmap pix);
 	~Paint();
-
 private:
 	QPixmap *pix;
 protected:

@@ -226,7 +226,7 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 			 break;
 	}
 	
-	 QGraphicsScene::mouseReleaseEvent(mouseEvent);
+	QGraphicsScene::mouseReleaseEvent(mouseEvent);
 	QGraphicsScene::update();
 }
 

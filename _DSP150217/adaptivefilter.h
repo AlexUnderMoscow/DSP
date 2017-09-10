@@ -8,8 +8,6 @@
 #include <QTimer>
 #include <QVariant>
 
-
-
 class AdaptiveWork
 {
 public:

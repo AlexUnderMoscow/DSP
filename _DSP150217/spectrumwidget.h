@@ -18,10 +18,6 @@
 #define PTS 1024 //1024
 #define AGC 4
 using namespace std;
-
-
-
-using namespace std;
 class spectrumWidget : public QObject
 {
 	Q_OBJECT
@@ -36,7 +32,6 @@ public:
 	int cnt;
 	int step; int counts;
 	int period;
-
 	vector<double> sp;
 	short* pcm;
 	int size;
