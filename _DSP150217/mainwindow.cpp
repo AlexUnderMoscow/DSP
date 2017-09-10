@@ -213,15 +213,15 @@ void MainWindow::createActions()
 
     saveConfig = new QAction(QIcon(),QString::fromUtf8("Сохранить как..."),this);
     description = new QAction(QIcon(),QString::fromUtf8("Описание..."),this);
-	connect(saveConfig, SIGNAL(triggered()),this, SLOT(saveConf()));
-	connect(description, SIGNAL(triggered()),this, SLOT(showDescription()));
+    connect(saveConfig, SIGNAL(triggered()),this, SLOT(saveConf()));
+    connect(description, SIGNAL(triggered()),this, SLOT(showDescription()));
     deleteAction = new QAction(QIcon(":/images/delete.png"),QString::fromUtf8("Delete"), this);
     deleteAction->setShortcut(QString::fromUtf8("Удалить"));
     deleteAction->setStatusTip(QString::fromUtf8("Удалить блок"));
     connect(deleteAction, SIGNAL(triggered()),this, SLOT(deleteItem()));
-	QIcon ico(":/images/play.png");
+    QIcon ico(":/images/play.png");
     startStop = new QAction(ico,QString::fromUtf8("Старт"), this);
-	connect(startStop, SIGNAL(triggered()),this, SLOT(startStopAction()));
+    connect(startStop, SIGNAL(triggered()),this, SLOT(startStopAction()));
     exitAction = new QAction(QString::fromUtf8("Выход"), this);
     exitAction->setShortcuts(QKeySequence::Quit);
     exitAction->setStatusTip(QString::fromUtf8("Выход"));
@@ -237,11 +237,11 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(QString::fromUtf8("Управление"));
-	fileMenu->addAction(startStop);
+    fileMenu->addAction(startStop);
     fileMenu->addAction(exitAction);
     confMenu = menuBar()->addMenu(QString::fromUtf8("Конфигурация..."));
-	confMenu->addAction(description);
-	confMenu ->addAction(saveConfig);
+    confMenu->addAction(description);
+    confMenu ->addAction(saveConfig);
     itemMenu = menuBar()->addMenu(QString::fromUtf8("Блок"));
     itemMenu->addAction(deleteAction);
     itemMenu->addSeparator();
@@ -251,8 +251,6 @@ void MainWindow::createMenus()
 void MainWindow::mainClose()
 {
   man->stopProcessing(false);
-  //delete scene;
-  //delete man;
   close();
   return;
 }
@@ -309,7 +307,7 @@ void MainWindow::startStopAction()
 			QTableWidget *tw = new QTableWidget(col,2,dlg);
 
 			QStringList sl;
-            sl <<QString::fromUtf8("Модуль") <<QString::fromUtf8("Ошибка") ;
+			sl <<QString::fromUtf8("Модуль") <<QString::fromUtf8("Ошибка") ;
 			tw->setHorizontalHeaderLabels(sl);
 			col=0;
 			for (int i = 0; i < scene->vel.size();i++)
@@ -328,7 +326,7 @@ void MainWindow::startStopAction()
 			tw->setGeometry(0,0,250,250);
 			dlg->setGeometry(100,100,250,250);
 			dlg->setModal(true);
-            dlg->setWindowTitle(QString::fromUtf8("Ошибки"));
+			dlg->setWindowTitle(QString::fromUtf8("Ошибки"));
 			dlg->show();
 		}
 	}
@@ -336,7 +334,7 @@ void MainWindow::startStopAction()
 void MainWindow::createToolbars()
 {
     editToolBar = addToolBar(QString::fromUtf8("Редактировать"));
-	editToolBar->addAction(startStop);
+    editToolBar->addAction(startStop);
     editToolBar->addAction(deleteAction);
     QToolButton *pointerButton = new QToolButton;
     pointerButton->setCheckable(true);
@@ -345,16 +343,13 @@ void MainWindow::createToolbars()
     QToolButton *linePointerButton = new QToolButton;
     linePointerButton->setCheckable(true);
     linePointerButton->setIcon(QIcon(":/images/linepointer.png"));
-
     pointerTypeGroup = new QButtonGroup(this);
     pointerTypeGroup->addButton(pointerButton, int(DiagramScene::MoveItem));
     pointerTypeGroup->addButton(linePointerButton,
                                 int(DiagramScene::InsertLine));
     connect(pointerTypeGroup, SIGNAL(buttonClicked(int)),
             this, SLOT(pointerGroupClicked(int)));
-
     QStringList scales;
-
     pointerToolbar = addToolBar(tr("Pointer type"));
     pointerToolbar->addWidget(pointerButton);
     pointerToolbar->addWidget(linePointerButton);
@@ -379,20 +374,18 @@ QWidget *MainWindow::createBackgroundCellWidget(const QString &text,
 
 QWidget *MainWindow::createCellWidget(const QString &text,moduleType type)
 {
-	QPixmap pix;
-	procThread th(NULL,NULL);
-	th.proc(getImage,type,&pix,NULL,NULL,NULL);
+    QPixmap pix;
+    procThread th(NULL,NULL);
+    th.proc(getImage,type,&pix,NULL,NULL,NULL);
     QIcon icon(pix);
     QToolButton *button = new QToolButton;
     button->setIcon(icon);
     button->setIconSize(QSize(50, 50));
     button->setCheckable(true);
     buttonGroup->addButton(button, int(type));
-
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(button, 0, 0, Qt::AlignHCenter);
     layout->addWidget(new QLabel(text), 1, 0, Qt::AlignCenter);
-
     QWidget *widget = new QWidget;
     widget->setLayout(layout);
     return widget;
@@ -448,16 +441,14 @@ QIcon MainWindow::createColorIcon(QColor color)
 void MainWindow::saveConf()
 {
 	QString path;
-    path = QFileDialog::getSaveFileName(this, QString::fromUtf8("Путь к файлу"), "", "");
+	path = QFileDialog::getSaveFileName(this, QString::fromUtf8("Путь к файлу"), "", "");
 	man->initMatrix();
 	bool b = false;
-
 	char * data;
 	unsigned int dataSize = 0;
 	cfgHeader head;
 	int tmp = sizeof(cfgHeader);
 	dataSize+=sizeof(cfgHeader);
-
 	memcpy(head.descr,txt,256);
 	head.modCount = scene->vel.size();
 	head.signature = cfgSignature;
@@ -505,12 +496,12 @@ void MainWindow::scanDirectory()
 	confMenu->addSeparator();
 	dir.setNameFilters(filters);				//задаем фильтр файлов по расширению 
 	listInfo = dir.entryInfoList();				//получаем список файлов
-	for (int i = 0; i < listInfo.size(); ++i)	//для всего списка
+	for (int i = 0; i < listInfo.size(); ++i)		//для всего списка
 	{
 		QFileInfo fileInfo = listInfo.at(i);
 		str = fileInfo.fileName();
 		QFile fileCfg(str);
-		fileCfg.open(QIODevice::ReadOnly | QIODevice::Unbuffered);					//открываем файл
+		fileCfg.open(QIODevice::ReadOnly | QIODevice::Unbuffered); //открываем файл
 		fileCfg.seek(0);	
 		fileCfg.read((char*)&head,sizeof(cfgHeader));
 		if (head.signature==cfgSignature)

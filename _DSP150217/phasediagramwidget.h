@@ -14,7 +14,6 @@
 class phaseDiagramWidget : public QWidget
 {
 	Q_OBJECT
-
 public:
 	phaseDiagramWidget(QWidget *parent);
 	void addSample(short x, short y);
@@ -23,11 +22,9 @@ public:
 	short* sinSample;
 	int load;
 	int rBlock;
-	int wBlock;
-	
+	int wBlock;	
 protected:
 	void paintEvent(QPaintEvent *event);
-
 private:
 };
 

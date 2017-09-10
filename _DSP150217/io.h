@@ -1,23 +1,15 @@
 #ifndef IO_H
 #define IO_H
-
 #include <QTimer>
-
 #ifdef min
 #undef min
 #endif
-
 #include <QTime>
 #include <QVariant>
 #include <QMessageBox>
-
 #include "interface.h"
-
 #include "spectrumwidget.h"
 #include "ui_io.h"
-
-
-
 class ioWork
 {
 public:

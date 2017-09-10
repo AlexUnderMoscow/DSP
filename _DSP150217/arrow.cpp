@@ -11,13 +11,13 @@ Arrow::Arrow(QWidget *startItem, QWidget *endItem, unsigned short _startID, unsi
 {
     myStartItem = startItem;
     myEndItem = endItem;
-	startID = _startID;
-	stopID = _stopID;
+    startID = _startID;
+    stopID = _stopID;
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     myColor = Qt::black;
     setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-	queue = new fifo(tmpBufSize);
-	sc = scene;
+    queue = new fifo(tmpBufSize);
+    sc = scene;
 }
 Arrow::~Arrow()
 {
@@ -56,9 +56,9 @@ QPainterPath Arrow::shape() const
 
 void Arrow::updatePosition()
 {
-	QPointF s(myStartItem->x()+myStartItem->width()/2,
+    QPointF s(myStartItem->x()+myStartItem->width()/2,
 		myStartItem->y()+myStartItem->height()/2);
-	QPointF f(myEndItem->x()+myEndItem->width()/2,
+    QPointF f(myEndItem->x()+myEndItem->width()/2,
 		myEndItem->y()+myEndItem->height()/2);
     QLineF thisline(s, f);
     setLine(thisline);
@@ -74,7 +74,6 @@ bool Arrow::inWidget(QWidget *w, float mx, float my)
 			right = w->x()+w->width();
 			up = w->y();
 			down = w->y()+w->height();
-
 			if ((mx > left) && (mx < right))
 			{
 				inX = true;

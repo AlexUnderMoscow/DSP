@@ -137,10 +137,10 @@ private:
 	QDialog * dlg;
 	spectrumWidget *sw;
 	QTimer *sptime;
-	private slots:
-		void update();
-		void indexChanged(QString s);
-		void spectrumShow();
+private slots:
+	void update();
+	void indexChanged(QString s);
+	void spectrumShow();
 };
 
 #endif // SUMM_H

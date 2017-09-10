@@ -18,15 +18,12 @@
 #include "manager.h"
 #include "thread.h"
 #include "descrform.h"
-
 class DiagramScene;
-
 QT_BEGIN_NAMESPACE
 class QAction;
 class QToolBox;
 class QSpinBox;
 class QComboBox;
-
 class QButtonGroup;
 class QLineEdit;
 class QGraphicsTextItem;
@@ -40,7 +37,6 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
    MainWindow();
    ~MainWindow();
@@ -57,14 +53,14 @@ private slots:
     void handleFontChange();
     void itemSelected(QGraphicsItem *item);
     void about();
-	void startStopAction();
-	void saveConf();
-	void showDescription();
-	void schemeChange();
-	void mainClose();
+    void startStopAction();
+    void saveConf();
+    void showDescription();
+    void schemeChange();
+    void mainClose();
 
 private:
-	char txt[256];
+    char txt[256];
     void createToolBox();
     void createActions();
     void createMenus();
@@ -76,25 +72,23 @@ private:
     QMenu *createColorMenu(const char *slot, QColor defaultColor);
     QIcon createColorToolButtonIcon(const QString &image, QColor color);
     QIcon createColorIcon(QColor color);
-	void createArray();
-	void scanDirectory();
+    void createArray();
+    void scanDirectory();
 
-	QFileInfoList listInfo;
+    QFileInfoList listInfo;
     DiagramScene *scene;
     QGraphicsView *view;
     QAction *exitAction;
     QAction *addAction;
     QAction *deleteAction;
-
-	QAction *startStop;
-	QAction *saveConfig;
-	QAction *description;
-
+    QAction *startStop;
+    QAction *saveConfig;
+    QAction *description;
     QAction *toFrontAction;
     QAction *sendBackAction;
     QAction *aboutAction;
     QMenu *fileMenu;
-	QMenu *confMenu;
+    QMenu *confMenu;
     QMenu *itemMenu;
     QMenu *aboutMenu;
     QToolBar *textToolBar;
@@ -120,9 +114,9 @@ private:
     QAction *fillAction;
     QAction *lineAction;
 
-	Manager *man; //указатель на управляющего
-	DescrForm * descr;
-	std::vector<QAction*> vecAct;
+    Manager *man; //указатель на управляющего
+    DescrForm * descr;
+    std::vector<QAction*> vecAct;
 
 };
 //! [0]

@@ -113,7 +113,7 @@ public:
 	}
 private:
 	bool sync1,sync2;			//признаки синхронизации
-	int offset1,offset2;		//смещения в битах относительно начал циклов
+	int offset1,offset2;			//смещения в битах относительно начал циклов
 	bool overflow;				//нет данных во входных буферах
 	bool FNF,Corr;				//признаки выбора метода синхронизации
     Ui::xormod *ui;

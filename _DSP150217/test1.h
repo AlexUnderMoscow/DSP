@@ -7,11 +7,9 @@
 #define PLATFORM PLATFOR_UNIX
 #endif
 
-
 #if PLATFORM==PLATFORM_WINDOWS
 #include <stdio.h>
 #include <string.h>
-
 
 #include <Windows.h>
 #include "winsock.h"
@@ -23,7 +21,6 @@
 #include <conio.h>
 
 #else
-
 
 //#include <stdio.h>
 //#include <string.h>
@@ -50,13 +47,11 @@ using namespace std;
 class test1Work
 {
 public:
-	long long dataCounter;
+    long long dataCounter;
     long long numPackets;
     unsigned int numOfLostPacket;
     unsigned short nextPackNumber;
-	Interface *inf;
-
-
+    Interface *inf;
 
 	test1Work(void* _inf, Ui::test1 *_ui)
 	{
@@ -67,10 +62,10 @@ public:
 		overflow = false;
 		nextPackNumber = 0;
 		numOfLostPacket = 0;
-        numPackets=0;
-        ui->port->setRange(1,65535);
-        ui->port->setValue(5001);
-        numPackets =0;
+		numPackets=0;
+		ui->port->setRange(1,65535);
+		ui->port->setValue(5001);
+		numPackets =0;
         if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
         {
             //fprintf(stderr,"Error in pcap_findalldevs: %s\n", errbuf);
@@ -103,10 +98,7 @@ public:
             }
 
 #if PLATFORM==PLATFORM_WINDOWS
-
 #endif
-
-
 	}
 
 	~test1Work()
@@ -120,12 +112,9 @@ public:
 	void Do()
 	{
 		
-
 #if PLATFORM==PLATFORM_WINDOWS
 
 #endif
-
-
         int sz =0;
         u_short sport,dport;
         ip_header *ih;
@@ -250,9 +239,8 @@ private:
     const u_char *pkt_data;
     unsigned short tmpPort;
     int index;
-	bool overflow;
-
-	Ui::test1 *ui;
+    bool overflow;
+    Ui::test1 *ui;
 };
 
 class test1 : public Interface

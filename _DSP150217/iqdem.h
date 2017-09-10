@@ -8,9 +8,6 @@
 #include "ui_iqdem.h"
 #include "phasediagramwidget.h"
 
-
-//#define pi 3.1428
-//#define pi 3.14159
 #define readBlock 2*1024
 #define samples 1
 
@@ -33,10 +30,8 @@ public:
 	double symbolFreq;
 	double clkPhase;
 	int ostatok;
-
 	short clkCosine[samples]; 
 	short	cosineOld;
-
 	double symCount;
 	bool first,first2;
 	double addPhase;
@@ -71,8 +66,8 @@ public:
 		ui->comboSymbolRate->addItem("4");
 		ui->comboSymbolRate->addItem("8");
 		ui->comboSymbolRate->addItem("16");
-        ui->comboModulation->addItem(QString::fromUtf8("PSK"));
-        ui->comboModulation->addItem(QString::fromUtf8("QPSK"));
+		ui->comboModulation->addItem(QString::fromUtf8("PSK"));
+		ui->comboModulation->addItem(QString::fromUtf8("QPSK"));
 		amp = 800;
 		ostatok=0;
 		pdw = _pdw;
@@ -86,8 +81,6 @@ public:
 		mask = 0x01;
 		index=0;
 		memset(outbits,0,10);
-
-
 	}
 	~iqDemWork()
 	{
@@ -191,8 +184,6 @@ for (int j = 0; j<readBlock;j++)
 					mask = mask << 1;
 				}
 				
-				
-
 				if (mask==0)
 				{
 					mask = 0x01;
@@ -260,7 +251,6 @@ for (int j = 0; j<readBlock;j++)
 		//clkPhase-=(pi/4-pi/16-pi/32-pi/64-pi/128);
 		thistime=0;
 		amp = 800;
-
 		first = true;
 		first2 = true;
 		symCount = 0;
@@ -268,8 +258,6 @@ for (int j = 0; j<readBlock;j++)
 		addClk = 0;
 		memset((char*)clkCosine, 0,samples*sizeof(short));
 		cosineOld = 0;
-
-
 		QString s = ui->comboSymbolRate->currentText();
 		bool ok;
 		QString f = ui->lineFreqEdit->text();

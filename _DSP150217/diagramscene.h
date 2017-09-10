@@ -54,11 +54,11 @@ public:
 	QVector<element> vel;					//вектор модулей с интерфейсами
 	element* elList;
 	unsigned int listSize;
-	QWidget * start_w;						//стартовая форма (для стрелки)
-	QWidget * stop_w;						//конечная форма
+	QWidget * start_w;					//стартовая форма (для стрелки)
+	QWidget * stop_w;					//конечная форма
 	unsigned short startID;					//идентификатор стартовой формы
 	unsigned short stopID;					//идентификатор конечной формы
-	bool working;							//признак включения работы для манагера
+	bool working;						//признак включения работы для манагера
 	
 	Mode myMode;
 
@@ -79,10 +79,10 @@ protected:
 
 private:
     bool isItemChange(int type);
-	QWidget* whatCurentWidget(int x, int y, unsigned short *ID);	//что за форма под мышкой и какой у нее ID
+    QWidget* whatCurentWidget(int x, int y, unsigned short *ID);	//что за форма под мышкой и какой у нее ID
     moduleType myItemType;
     QMenu *myItemMenu;
-   QAbstractButton *mybut;
+    QAbstractButton *mybut;
     bool leftButtonDown;
     QPointF startPoint;
     QGraphicsLineItem *line;
@@ -91,7 +91,7 @@ private:
     QColor myTextColor;
     QColor myItemColor;
     QColor myLineColor;
-	int dx,dy;
+    int dx,dy;
 };
 
 

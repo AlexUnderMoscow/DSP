@@ -8,9 +8,6 @@ io::io(QDialog *parent,marray** _arr, unsigned int *_size)
 	MODpixmap.load(":/images/btn_next_green.png");
 	type = Io;
 	work = new ioWork((void*)this,&ui);
-	//connect(ui.comboKbytes,SIGNAL(currentIndexChanged(QString)),this,SLOT(indexChanged(QString)));
-
-	//connect(ui.checkSpectrum,SIGNAL(clicked()),this,SLOT(spectrumShow()));
 	widgetAddr = (void*)work;
 	form = this;
 	timer = new QTimer(this);
@@ -29,63 +26,44 @@ io::io(QDialog *parent,marray** _arr, unsigned int *_size)
 /**/
 
         top = groupManager->addProperty(QString::fromUtf8("Пропуск данных"));
-
         fileName = stringManager->addProperty(QString::fromUtf8("Путь к файлу"));
         stringManager->setValue(fileName,"test.pcm");
-
         bShowSpectrum = boolManager->addProperty(QString::fromUtf8("Показать спектр"));
         boolManager->setValue(bShowSpectrum,false);
-
         enumBufSize = enumManager->addProperty(QString::fromUtf8("Считывать, Кб"));
         QStringList enumNames;
         enumNames << "1" << "2" << "4" << "8" << "16" << "32" << "64" << "128" << "256" << "512" << "1024" << "2048";
         enumManager->setEnumNames(enumBufSize, enumNames);
-
         IntBufLoad = intManager->addProperty(QString::fromUtf8("Загрузка буфера, %"));
         intManager->setRange(IntBufLoad, 0, 100);
         intManager->setValue(IntBufLoad,0);
         IntBufLoad->setEnabled(false);
-
-
         fDataReceived = doubleManager->addProperty(QString::fromUtf8("Данных принято, Мб"));
         doubleManager->setValue(fDataReceived,0);
         fDataReceived->setEnabled(false);
-
-
         flagitem = flagManager->addProperty(QString::fromUtf8("Синхронизация по..."));
-         QStringList flagList;
-         flagList << QString::fromUtf8("Фазе") << QString::fromUtf8("Тактам") <<  QString::fromUtf8("Частоте");
+        QStringList flagList;
+        flagList << QString::fromUtf8("Фазе") << QString::fromUtf8("Тактам") <<  QString::fromUtf8("Частоте");
         flagManager->setFlagNames(flagitem,flagList);
         flagManager->setValue(flagitem,5);
         subBoolManager = flagManager->subBoolPropertyManager();
-
         fAverageSpeed = doubleManager->addProperty(QString::fromUtf8("Средняя скорость, Мб/с"));
         doubleManager->setValue(fAverageSpeed,0);
         fAverageSpeed->setEnabled(false);
-
-
-
         connect(boolManager,SIGNAL(valueChanged(QtProperty*,bool)),this,SLOT(boolValueChaged(QtProperty*,bool)));
         connect(enumManager,SIGNAL(valueChanged(QtProperty*,int)),this,SLOT(enumValueChaged(QtProperty*,int)));
-
-
         top->addSubProperty(enumBufSize);
         top->addSubProperty(bShowSpectrum);
         top->addSubProperty(fDataReceived);
         top->addSubProperty(fAverageSpeed);
         top->addSubProperty(IntBufLoad);
-        //top->addSubProperty(fileName);
-        //top->addSubProperty(flagitem);
-
         treeView = new QtTreePropertyBrowser(this);
-
         treeView->setFactoryForManager(boolManager, checkBoxFactory);
         treeView->setFactoryForManager(intManager, spinBoxFactory);
         treeView->setFactoryForManager(stringManager, lineEditFactory);
         treeView->setFactoryForManager(enumManager, comboBoxFactory);
         treeView->setFactoryForManager(doubleManager, doubleSpinFactory);
         treeView->setFactoryForManager(subBoolManager, checkBoxFactory);
-
         treeView->addProperty(top);
         treeView->setGeometry(10,20,this->width()-20,this->height()-30);
         treeView->setResizeMode(QtTreePropertyBrowser::Interactive);
@@ -94,8 +72,6 @@ io::io(QDialog *parent,marray** _arr, unsigned int *_size)
         treeView->setPropertiesWithoutValueMarked(true);
         treeView->setRootIsDecorated(false);
         treeView->show();
-
-
         /**/
 }
 
