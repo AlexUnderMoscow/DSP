@@ -1,7 +1,7 @@
 #pragma once
 
 #include "struct.h"
-#include <QMutex>
+#include <mutex>
 //#include <ctime>
 class fifo
 {
@@ -23,7 +23,6 @@ private:
 	char * buf;								// указатель на буфер
 	unsigned int readIndex;							//индекс на чтение
 	unsigned int writeIndex;						//индекс на запись
-	QMutex critical;
+	std::mutex critical;
 	int loadBuf;
-
 };
