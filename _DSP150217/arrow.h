@@ -26,7 +26,7 @@ public:
       QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
 	~Arrow();
 
-	fifo *queue;							//у стрелки циклический буфер
+	std::shared_ptr<fifo> queue;				//у стрелки циклический буфер
 	QWidget *myStartItem;					//форма на начале стрелки
 	unsigned short startID;					//идентификатор формы на начале стрелки
 	QWidget *myEndItem;						//форма на конце стрелки

@@ -19,9 +19,10 @@ io::io(QDialog *parent,marray** _arr, unsigned int *_size)
 	createButton(this);
 	arr = _arr;
 	size=_size;
-	dlg = NULL;
-	sw = NULL;
-	sptime = NULL;
+	dlg = nullptr;
+	sw = nullptr;
+	//sptime = nullptr;
+
 
 /**/
 
@@ -46,24 +47,24 @@ io::io(QDialog *parent,marray** _arr, unsigned int *_size)
         flagList << QString::fromUtf8("Фазе") << QString::fromUtf8("Тактам") <<  QString::fromUtf8("Частоте");
         flagManager->setFlagNames(flagitem,flagList);
         flagManager->setValue(flagitem,5);
-        subBoolManager = flagManager->subBoolPropertyManager();
+        //subBoolManager =flagManager->subBoolPropertyManager();
         fAverageSpeed = doubleManager->addProperty(QString::fromUtf8("Средняя скорость, Мб/с"));
         doubleManager->setValue(fAverageSpeed,0);
         fAverageSpeed->setEnabled(false);
-        connect(boolManager,SIGNAL(valueChanged(QtProperty*,bool)),this,SLOT(boolValueChaged(QtProperty*,bool)));
-        connect(enumManager,SIGNAL(valueChanged(QtProperty*,int)),this,SLOT(enumValueChaged(QtProperty*,int)));
+        connect(boolManager.get(),SIGNAL(valueChanged(QtProperty*,bool)),this,SLOT(boolValueChaged(QtProperty*,bool)));
+        connect(enumManager.get(),SIGNAL(valueChanged(QtProperty*,int)),this,SLOT(enumValueChaged(QtProperty*,int)));
         top->addSubProperty(enumBufSize);
         top->addSubProperty(bShowSpectrum);
         top->addSubProperty(fDataReceived);
         top->addSubProperty(fAverageSpeed);
         top->addSubProperty(IntBufLoad);
-        treeView = new QtTreePropertyBrowser(this);
-        treeView->setFactoryForManager(boolManager, checkBoxFactory);
-        treeView->setFactoryForManager(intManager, spinBoxFactory);
-        treeView->setFactoryForManager(stringManager, lineEditFactory);
-        treeView->setFactoryForManager(enumManager, comboBoxFactory);
-        treeView->setFactoryForManager(doubleManager, doubleSpinFactory);
-        treeView->setFactoryForManager(subBoolManager, checkBoxFactory);
+        treeView = std::shared_ptr<QtTreePropertyBrowser> (new QtTreePropertyBrowser(this));
+        treeView->setFactoryForManager(boolManager.get(), checkBoxFactory.get());
+        treeView->setFactoryForManager(intManager.get(), spinBoxFactory.get());
+        treeView->setFactoryForManager(stringManager.get(), lineEditFactory.get());
+        treeView->setFactoryForManager(enumManager.get(), comboBoxFactory.get());
+        treeView->setFactoryForManager(doubleManager.get(), doubleSpinFactory.get());
+        treeView->setFactoryForManager(subBoolManager.get(), checkBoxFactory.get());
         treeView->addProperty(top);
         treeView->setGeometry(10,20,this->width()-20,this->height()-30);
         treeView->setResizeMode(QtTreePropertyBrowser::Interactive);
@@ -89,27 +90,20 @@ void io::boolValueChaged (QtProperty *property, bool value)
       {
         if (value)
           {
-            dlg = new QDialog();
-            sw = new spectrumWidget(dlg,(short*)work->buf,2*1024*1024);
+            dlg = std::shared_ptr<QDialog> (new QDialog());
+            sw = std::shared_ptr<spectrumWidget> (new spectrumWidget(dlg.get(),(short*)work->buf,2*1024*1024));
             //sw->setGeometry(0,0,1200,350); //600
             dlg->setGeometry(100,100,1200,350);
             dlg->setModal(false);
             dlg->setWindowTitle(QString::fromUtf8("Спектр"));
             dlg->show();
-            //sptime=new QTimer();
-            //sptime->setInterval(100);
-            //sptime->start();
-          connect(sw->time,SIGNAL(timeout()),sw,SLOT(timeoutRepaint()));
+          connect(sw->time.get(),SIGNAL(timeout()),sw.get(),SLOT(timeoutRepaint()));
           }
         else
           {
-            if (sptime!=NULL) sptime->stop();
-            if (dlg!=NULL) dlg->close();
-            if (sw!=NULL) delete sw;
-            if (sptime!=NULL) delete sptime;
-            dlg=NULL;
-            sw = NULL;
-            sptime = NULL;
+            sw=nullptr;
+            dlg=nullptr;
+
           }
       }
 }

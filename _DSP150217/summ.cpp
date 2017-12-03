@@ -30,7 +30,7 @@ void summ::update()
 {
 	QString s;
 	float a;
-	if (work!=NULL) 
+	if (work!=nullptr)
 	{
 		a=work->dataCounter;
 	}
@@ -81,7 +81,7 @@ void summ::spectrumShow()
 		sptime->stop();
 		dlg->close();
 		delete sw;
-		dlg=NULL;
+		dlg=nullptr;
 		delete sptime;
 	}
 }

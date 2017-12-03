@@ -18,7 +18,7 @@ DiagramScene::DiagramScene(QMenu *itemMenu, QObject *parent)
     myTextColor = Qt::black;
     myLineColor = Qt::black;
 	working = false;
-	elList = NULL;
+	elList = nullptr;
 	dx = 0;
 	dy = 0;
 }
@@ -48,11 +48,11 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)//наж
 
 
 	element el;
-	start_w = NULL;
-	stop_w = NULL;
+	start_w = nullptr;
+	stop_w = nullptr;
 
-	el.inter  = NULL;
-	el.proxy = NULL;
+	el.inter  = nullptr;
+	el.proxy = nullptr;
 
     procThread th((marray**)&elList,&listSize);
 
@@ -61,7 +61,7 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)//наж
    switch (myMode) {
         case InsertItem:
 
-		th.proc(newModule,myItemType,NULL,&el.proxy,&el.inter,NULL);
+		th.proc(newModule,myItemType,nullptr,&el.proxy,&el.inter,nullptr);
 		el.proxy->setWindowModality(Qt::NonModal);
 		el.proxy->setGeometry(x,y,el.proxy->width(),el.proxy->height());
 		addWidget(el.proxy);
@@ -79,14 +79,14 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)//наж
 
 			
 			start_w = whatCurentWidget(x,y,&startID);
-			//if (start_w!=NULL) start_w->setVisible(false);
+			//if (start_w!=nullptr) start_w->setVisible(false);
 
 	break;
 		
 		case MoveItem:
 			start_w = whatCurentWidget(x,y,&startID);
 
-			if (start_w!=NULL)
+			if (start_w!=nullptr)
 			{
 				//if (y < (start_w->y()+20))
 				//  {
@@ -101,7 +101,7 @@ void DiagramScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)//наж
 		case InsertText:
 			start_w = whatCurentWidget(x,y,&startID);
 			Interface *inter = getInterface(start_w);
-			if (start_w!=NULL)
+			if (start_w!=nullptr)
 			{
 				dx = x - start_w->x();
 				dy = y - start_w->y();
@@ -126,7 +126,7 @@ QWidget* DiagramScene::whatCurentWidget(int mx, int my, unsigned short *ID)
 {
 	bool inX,inY;
 	QWidget * w;
-	w = NULL;
+	w = nullptr;
 	int left,right,up,down;
 	left=right=up=down = 0;
 	for (int i = 0; i < vel.size(); i++) 
@@ -165,7 +165,7 @@ void DiagramScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	{
 		QPointF p = mouseEvent->scenePos();
 		int ymousepos = p.y();
-		if (start_w!=NULL)
+		if (start_w!=nullptr)
 		{
 
 		   // if (ymousepos > (start_w->y()+40)) return;
@@ -201,17 +201,17 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 			mybut->setChecked(false);
 			break;
 		 case InsertLine:
-			 if ((start_w==NULL)||(stop_w==NULL))
+			 if ((start_w==nullptr)||(stop_w==nullptr))
 			 {
 				 removeItem(line);
 				 return;
 			 }
-			 if ((stop_w!=NULL) && (start_w!=NULL))
+			 if ((stop_w!=nullptr) && (start_w!=nullptr))
 			 {
 				 removeItem(line);
 				 if (start_w != stop_w)
 				 {
-					 Arrow *arrow = new Arrow(start_w,stop_w,startID,stopID,NULL,this);
+					 Arrow *arrow = new Arrow(start_w,stop_w,startID,stopID,nullptr,this);
 					 getInterface(start_w)->addArrow(arrow);
 					 getInterface(stop_w)->addArrow(arrow);
 					 arrow->setZValue(-1000.0);
@@ -232,7 +232,7 @@ void DiagramScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 Interface* DiagramScene::getInterface(QWidget* w)
 {
-	Interface* i = NULL;
+	Interface* i = nullptr;
 	for (int index = 0; index<vel.size(); index++)
 	{
 		if (vel.at(index).proxy == w)
@@ -271,7 +271,7 @@ void DiagramScene::loadScheme(QFile* file)
 		str.y*/
 		element el;
         procThread th((marray**)&elList,&listSize);
-		th.proc(newModule,str.type,NULL,&el.proxy,&el.inter,NULL);
+                th.proc(newModule,str.type,nullptr,&el.proxy,&el.inter,nullptr);
 		el.proxy->setWindowModality(Qt::NonModal);
 		el.proxy->setGeometry(str.x,str.y,el.proxy->width(),el.proxy->height());
 		addWidget(el.proxy);
@@ -296,7 +296,7 @@ void DiagramScene::loadScheme(QFile* file)
 				stop_w = vel.at(hor).proxy;
 				startID = ver;
 				stopID = hor;
-				Arrow *arrow = new Arrow(start_w,stop_w,startID,stopID,NULL,this);
+				Arrow *arrow = new Arrow(start_w,stop_w,startID,stopID,nullptr,this);
 
 				getInterface(start_w)->addArrow(arrow);
 				getInterface(stop_w)->addArrow(arrow);
@@ -313,6 +313,6 @@ void DiagramScene::loadScheme(QFile* file)
 	}
 	/**/
 
-	start_w=NULL;
+	start_w=nullptr;
 }
 

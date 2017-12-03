@@ -6,37 +6,37 @@ Interface::Interface(QDialog *parent)
 	ready = false;
 	expand = true;
 	form = parent;
-	treeView = NULL;
+	treeView = nullptr;
 
-        boolManager = new QtBoolPropertyManager();
-        intManager = new QtIntPropertyManager();
-        stringManager = new QtStringPropertyManager();
-        enumManager = new QtEnumPropertyManager();
-        doubleManager = new QtDoublePropertyManager();
-        groupManager = new QtGroupPropertyManager();
-        flagManager = new QtFlagPropertyManager();
-        subBoolManager = new QtBoolPropertyManager();
-        checkBoxFactory = new QtCheckBoxFactory();
-        spinBoxFactory = new QtSpinBoxFactory();
-        lineEditFactory = new QtLineEditFactory();
-        comboBoxFactory = new QtEnumEditorFactory();
-        doubleSpinFactory = new QtDoubleSpinBoxFactory();
+        boolManager = std::shared_ptr<QtBoolPropertyManager> (new QtBoolPropertyManager());
+        intManager = std::shared_ptr<QtIntPropertyManager> (new QtIntPropertyManager());
+        stringManager = std::shared_ptr<QtStringPropertyManager> (new QtStringPropertyManager());
+        enumManager =  std::shared_ptr<QtEnumPropertyManager> (new QtEnumPropertyManager());
+        doubleManager = std::shared_ptr<QtDoublePropertyManager> (new QtDoublePropertyManager());
+        groupManager = std::shared_ptr<QtGroupPropertyManager> (new QtGroupPropertyManager());
+        flagManager = std::shared_ptr<QtFlagPropertyManager> (new QtFlagPropertyManager());
+        subBoolManager = std::shared_ptr<QtBoolPropertyManager> (new QtBoolPropertyManager());
+        checkBoxFactory = std::shared_ptr<QtCheckBoxFactory> (new QtCheckBoxFactory());
+        spinBoxFactory = std::shared_ptr<QtSpinBoxFactory> (new QtSpinBoxFactory());
+        lineEditFactory = std::shared_ptr<QtLineEditFactory> (new QtLineEditFactory());
+        comboBoxFactory = std::shared_ptr<QtEnumEditorFactory> (new QtEnumEditorFactory());
+        doubleSpinFactory = std::shared_ptr<QtDoubleSpinBoxFactory> (new QtDoubleSpinBoxFactory());
 }
 
 Interface::~Interface()
 {
-	delete show;
+
 }
 
 void Interface::createButton(QDialog* dlg)
 {
-	show = new QToolButton(dlg);
-	le = new QPushButton(dlg);
+	show = std::shared_ptr<QToolButton> (new QToolButton(dlg));
+	le = std::shared_ptr<QPushButton> (new QPushButton(dlg));
 	le->setVisible(false);
 	d = dlg;
 	show->setGeometry(0,0,15,15);
 	show->setText("...");
-	connect(show,SIGNAL(clicked()),this,SLOT(expandForm()));
+	connect(show.get(),SIGNAL(clicked()),this,SLOT(expandForm()));
 }
 void Interface::expandForm()
 {
@@ -53,8 +53,8 @@ void Interface::expandForm()
 		le->setGeometry(0,0,50,20);
 		le->setEnabled(false);
 		le->setVisible(true);
-		if (treeView!=NULL) treeView->setVisible(false);
-//		if (indicatorTree!=NULL) indicatorTree->setVisible(false);
+		if (treeView!=nullptr) treeView->setVisible(false);
+//		if (indicatorTree!=nullptr) indicatorTree->setVisible(false);
 	}
 	else
 	{
@@ -66,8 +66,8 @@ void Interface::expandForm()
 		show->setIcon(ico);
 		show->setText("...");
 		le->setVisible(false);
-		if (treeView!=NULL) treeView->setVisible(true);
-//		if (indicatorTree!=NULL) indicatorTree->setVisible(true);
+		if (treeView!=nullptr) treeView->setVisible(true);
+//		if (indicatorTree!=nullptr) indicatorTree->setVisible(true);
 	}
 }
 void Interface::deleteObject()
@@ -95,14 +95,14 @@ void Interface::removeArrow(Arrow *arrow)
 void Interface::removeArrows() //удаление стрелок у самого себя и у смежных модулей
 {
 	Arrow* ar;
-	Interface* inter=NULL;
+	Interface* inter=nullptr;
 	for (int i=0; i<arrows.size();i++)
 	{
 		ar = arrows.at(i);
 		inter = getInterface(ar->myEndItem);
-		if ((inter!=NULL)&&(inter!=this)) inter->removeArrow(ar);
+		if ((inter!=nullptr)&&(inter!=this)) inter->removeArrow(ar);
 		inter = getInterface(ar->myStartItem);
-		if ((inter!=NULL)&&(inter!=this)) inter->removeArrow(ar);
+		if ((inter!=nullptr)&&(inter!=this)) inter->removeArrow(ar);
 		arrows.at(i)->clear();
 	}
 	arrows.clear();
@@ -110,7 +110,7 @@ void Interface::removeArrows() //удаление стрелок у самого
 
 Interface* Interface::getInterface(QWidget* w)
 {
-	Interface* i = NULL;
+	Interface* i = nullptr;
 	for (unsigned int index = 0; index<*size; index++)
 	{
 		if ((*arr)[index].widget == w)

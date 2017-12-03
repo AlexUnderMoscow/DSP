@@ -3,12 +3,12 @@ Manager::Manager(QObject *parent,DiagramScene* _scene,marray** _arr, unsigned in
 : QThread(parent)
 {
 	scene = _scene;
-	matrix = NULL;
-	pool=NULL;
+	matrix = nullptr;
+	pool=nullptr;
 	inWork = false;
 	arr= _arr;
 	sizeM=_size;
-	pool = NULL;
+	pool = nullptr;
 }
 
 Manager::~Manager()
@@ -17,7 +17,7 @@ Manager::~Manager()
 }
 void Manager::initMatrix()
 {
-	if (matrix!=NULL) {matrix = NULL;}
+	if (matrix!=nullptr) {matrix = nullptr;}
 	int size = scene->vel.size();
 	matrix = new bool [size*size];
 	for (int i = 0; i<size*size;i++)
@@ -62,7 +62,7 @@ void Manager::init()
 	for (int i = 0; i < size;i++)
 	{
 		Interface *inf = scene->vel.at(i).inter;
-		th.proc(Init,inf->type,NULL,NULL,&inf,&nonReady);
+		th.proc(Init,inf->type,nullptr,nullptr,&inf,&nonReady);
 	}
 
 	if (nonReady) //выходим и ничего не запускаем потом как нить индикаторами показать что ошибки есть
@@ -70,7 +70,7 @@ void Manager::init()
 		return;
 	}
 	//создаем бесконечный цикл обработки
-	if (pool!=NULL)
+	if (pool!=nullptr)
 	{
 
 	}
@@ -95,7 +95,7 @@ void Manager::run()
 }
 void Manager::stopProcessing(bool onlyStop)
 {
-	if (pool==NULL)
+	if (pool==nullptr)
 	{
 		return;
 	}

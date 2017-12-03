@@ -66,7 +66,7 @@ public:
 		ui->port->setRange(1,65535);
 		ui->port->setValue(5001);
 		numPackets =0;
-        if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
+	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, nullptr, &alldevs, errbuf) == -1)
         {
             //fprintf(stderr,"Error in pcap_findalldevs: %s\n", errbuf);
             return;
@@ -191,7 +191,7 @@ public:
 	{
         numPackets =0;
 		inf->ready = true;
-        if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
+	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, nullptr, &alldevs, errbuf) == -1)
         {
             //fprintf(stderr,"Error in pcap_findalldevs: %s\n", errbuf);
             return;
@@ -212,9 +212,9 @@ public:
                                                            // 65536 guarantees that the whole packet will be captured on all the link layers
                                          PCAP_OPENFLAG_PROMISCUOUS,    // promiscuous mode
                                          1000,             // read timeout
-                                         NULL,             // authentication on the remote machine
+                                         nullptr,             // authentication on the remote machine
                                          errbuf            // error buffer
-                                         ) ) == NULL)
+                                         ) ) == nullptr)
                {
                   // fprintf(stderr,"\nUnable to open the adapter. %s is not supported by WinPcap\n", d->name);
                    /* Free the device list */

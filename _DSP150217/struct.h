@@ -1,7 +1,7 @@
 
 #pragma once
 #include <Windows.h>
-
+#include <memory>
 //#define pi 3.1415926536
 #define cfgSignature 0x00FFCCEE
 #define exten ".cfg"

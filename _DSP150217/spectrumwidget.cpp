@@ -105,10 +105,10 @@ spectrumWidget::spectrumWidget(QWidget *parent, short* _pcm, int _size)
 	period = quantums / periods;
 	
 	/**/
-	time = new QTimer();
+	time = std::shared_ptr<QTimer> (new QTimer());
 	time->setInterval(50);
 	time->start();
-	cp=new QCustomPlot(parent);
+	cp= std::shared_ptr<QCustomPlot> (new QCustomPlot(parent));
 	cp->setGeometry(0,0,1200,350);
 	cp->show();
 	cp->clearGraphs();
@@ -133,11 +133,12 @@ spectrumWidget::spectrumWidget(QWidget *parent, short* _pcm, int _size)
 		  masVec[7].push_back(0);
 	       dfourier.push_back(0);
 	  }
+	dsin.resize(PTS*4);
 }
 
 void spectrumWidget::timeoutRepaint()
 {
-    dsin.clear();
+
     for (int i=0; i<PTS*4; i++)
     {
             short tmp = pcm[i];
@@ -146,7 +147,7 @@ void spectrumWidget::timeoutRepaint()
             char* t1 = (char*)&tmp1;
             *(t1) = *(t+1);
             *(t1+1)=*t;
-            dsin.push_back(tmp);
+            dsin.at(i)=tmp;
     }
 
     //dfourier = FFTCalc(dsin, PTS*2, 1);
@@ -163,21 +164,20 @@ void spectrumWidget::timeoutRepaint()
     /**/
 
     /**/
-    QVector<double> graphics;
-    QVector<double> x;
+     graphics.resize(dfourier.size());
+     xvec.resize(dfourier.size());
     for (int i=0;i<dfourier.size();i++)
       {
-        x.push_back(i*(4000./PTS));
-        graphics.push_back(dfourier.at(i));
+        xvec[i]=i*(4000./PTS);
+        graphics[i]=dfourier.at(i);
       }
-    cp->graph(0)->setData(x,graphics);
+    cp->graph(0)->setData(xvec,graphics);
     cp->replot();
 }
 
 spectrumWidget::~spectrumWidget()
 {
-  delete time;
-  delete cp;
+
 }
 
 

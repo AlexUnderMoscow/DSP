@@ -17,7 +17,7 @@ void procThread::setAddr(void* _addr)
 }
 void procThread::run()
 {
-	this->proc(Processing,None,NULL,NULL,NULL,NULL);
+	this->proc(Processing,None,nullptr,nullptr,nullptr,nullptr);
 }
 void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Interface** inter, bool *ready)
 {
@@ -45,7 +45,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			fileClass *fil;
-			fil = new fileClass(NULL,NULL,NULL);
+			fil = new fileClass(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -53,7 +53,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			fileClass *fil;
-			fil = new fileClass(NULL,arr,size);
+			fil = new fileClass(nullptr,arr,size);
 			*w = ((QWidget *)fil);
 			*inter = ((Interface*)fil);
 		}
@@ -82,7 +82,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			AdaptiveFilter *fil;
-			fil = new AdaptiveFilter(NULL,NULL,NULL);
+			fil = new AdaptiveFilter(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -90,7 +90,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			AdaptiveFilter *fil;
-			fil = new AdaptiveFilter(NULL,arr,size);
+			fil = new AdaptiveFilter(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -121,7 +121,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		  if (rs==getImage)
 		  {
 			  config *fil;
-			  fil = new config(NULL,NULL,NULL);
+			  fil = new config(nullptr,nullptr,nullptr);
 			  inf = (Interface*)fil;
 			  *pix = inf->image();
 			  delete fil;
@@ -129,7 +129,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		  if (rs==newModule)
 		  {
 			  config *fil;
-			  fil = new config(NULL,arr,size);
+			  fil = new config(nullptr,arr,size);
 			  *w = (QWidget *)fil;
 			  *inter = (Interface*)fil;
 		  }
@@ -161,7 +161,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			fileSave *fil;
-			fil = new fileSave(NULL,NULL,NULL);
+			fil = new fileSave(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -169,7 +169,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			fileSave *fil;
-			fil = new fileSave(NULL,arr,size);
+			fil = new fileSave(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -199,7 +199,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			io *fil;
-			fil = new io(NULL,NULL,NULL);
+			fil = new io(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -207,7 +207,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			io *fil;
-			fil = new io(NULL,arr,size);
+			fil = new io(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -237,7 +237,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			bitGenerator *fil;
-			fil = new bitGenerator(NULL,NULL,NULL);
+			fil = new bitGenerator(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -245,7 +245,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			bitGenerator *fil;
-			fil = new bitGenerator(NULL,arr,size);
+			fil = new bitGenerator(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -275,7 +275,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			psk2Mod *fil;
-			fil = new psk2Mod(NULL,NULL,NULL);
+			fil = new psk2Mod(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -283,7 +283,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			psk2Mod *fil;
-			fil = new psk2Mod(NULL,arr,size);
+			fil = new psk2Mod(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -314,7 +314,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			summ *fil;
-			fil = new summ(NULL,NULL,NULL);
+			fil = new summ(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -322,7 +322,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			summ *fil;
-			fil = new summ(NULL,arr,size);
+			fil = new summ(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -353,7 +353,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
             xormod *fil;
-            fil = new xormod(NULL,NULL,NULL);
+            fil = new xormod(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -361,7 +361,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
             xormod *fil;
-            fil = new xormod(NULL,arr,size);
+            fil = new xormod(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -394,7 +394,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			QPSKmod *fil;
-			fil = new QPSKmod(NULL,NULL,NULL);
+			fil = new QPSKmod(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -402,7 +402,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			QPSKmod *fil;
-			fil = new QPSKmod(NULL,arr,size);
+			fil = new QPSKmod(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}
@@ -433,7 +433,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
         if (rs==getImage)
         {
             test1 *fil;
-            fil = new test1(NULL,NULL,NULL);
+            fil = new test1(nullptr,nullptr,nullptr);
             inf = (Interface*)fil;
             *pix = inf->image();
             delete fil;
@@ -441,7 +441,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
         if (rs==newModule)
         {
             test1 *fil;
-            fil = new test1(NULL,arr,size);
+            fil = new test1(nullptr,arr,size);
             *w = (QWidget *)fil;
             *inter = (Interface*)fil;
         }
@@ -471,7 +471,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==getImage)
 		{
 			IQdem *fil;
-			fil = new IQdem(NULL,NULL,NULL);
+			fil = new IQdem(nullptr,nullptr,nullptr);
 			inf = (Interface*)fil;
 			*pix = inf->image();
 			delete fil;
@@ -479,7 +479,7 @@ void procThread::proc(reason rs, moduleType type,QPixmap * pix, QWidget **w, Int
 		if (rs==newModule)
 		{
 			IQdem *fil;
-			fil = new IQdem(NULL,arr,size);
+			fil = new IQdem(nullptr,arr,size);
 			*w = (QWidget *)fil;
 			*inter = (Interface*)fil;
 		}

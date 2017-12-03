@@ -44,7 +44,7 @@ public:
 
 	~summWork()
 	{
-	//	inf = NULL;
+	//	inf = nullptr;
 	}
 	void Do()
 	{

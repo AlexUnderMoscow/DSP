@@ -16,26 +16,15 @@ Arrow::Arrow(QWidget *startItem, QWidget *endItem, unsigned short _startID, unsi
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     myColor = Qt::black;
     setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    queue = new fifo(tmpBufSize);
+    queue = std::shared_ptr<fifo>(new fifo(tmpBufSize));
     sc = scene;
 }
 Arrow::~Arrow()
 {
-	/*if (queue!=NULL)  
-	{
-		queue->deleteBuf();
-		delete queue;
-		queue = NULL;
-	}*/
+
 }
 void Arrow::clear()
 {	
-	if (queue!=NULL)
-	{
-		queue->deleteBuf();
-		delete queue;
-		queue = NULL;
-	}
 	sc->removeItem(this);						//!!!!
 }
 

@@ -17,8 +17,8 @@ config::config(QDialog *parent,marray** _arr, unsigned int *_size)
 	createButton(this);
 	arr = _arr;
 	size=_size;
-	dlg = NULL;
-	sptime = NULL;
+	dlg = nullptr;
+	sptime = nullptr;
 
 /*
 	QtProperty *top;
@@ -95,14 +95,14 @@ config::config(QDialog *parent,marray** _arr, unsigned int *_size)
          flagList << QString::fromUtf8("1") << QString::fromUtf8("2") <<  QString::fromUtf8("3") <<  QString::fromUtf8("4");
         flagManager->setFlagNames(lampFlags,flagList);
         flagManager->setValue(lampFlags,7);
-        subBoolManager = flagManager->subBoolPropertyManager();
+        //subBoolManager = flagManager->subBoolPropertyManager();
 
         flagitem = flagManager->addProperty(QString::fromUtf8("Подстройка..."));
          QStringList optionList;
          optionList << QString::fromUtf8("Фазы") << QString::fromUtf8("Тактов") <<  QString::fromUtf8("Амплитуды");
         flagManager->setFlagNames(flagitem,optionList);
         flagManager->setValue(flagitem,0);
-        subBoolManager = flagManager->subBoolPropertyManager();
+        //subBoolManager = flagManager->subBoolPropertyManager();
 
         fKuFreq = doubleManager->addProperty(QString::fromUtf8("K/y в петле частоты"));
         doubleManager->setValue(fKuFreq,-0.029);
@@ -139,8 +139,8 @@ config::config(QDialog *parent,marray** _arr, unsigned int *_size)
         doubleManager->setDecimals(fAruAcc,3);
         fAruAcc->setEnabled(true);
 
-        connect(boolManager,SIGNAL(valueChanged(QtProperty*,bool)),this,SLOT(boolValueChaged(QtProperty*,bool)));
-        connect(enumManager,SIGNAL(valueChanged(QtProperty*,int)),this,SLOT(enumValueChaged(QtProperty*,int)));
+        connect(boolManager.get(),SIGNAL(valueChanged(QtProperty*,bool)),this,SLOT(boolValueChaged(QtProperty*,bool)));
+        connect(enumManager.get(),SIGNAL(valueChanged(QtProperty*,int)),this,SLOT(enumValueChaged(QtProperty*,int)));
 
         top->addSubProperty(bLoadConf);
         top->addSubProperty(enumEthDevice);
@@ -162,14 +162,14 @@ config::config(QDialog *parent,marray** _arr, unsigned int *_size)
         top->addSubProperty(enumFilterBandPass);
         top->addSubProperty(lampFlags);
 
-        treeView = new QtTreePropertyBrowser(this);
+        treeView = std::shared_ptr<QtTreePropertyBrowser> (new QtTreePropertyBrowser(this));
 
-        treeView->setFactoryForManager(boolManager, checkBoxFactory);
-        treeView->setFactoryForManager(intManager, spinBoxFactory);
-        treeView->setFactoryForManager(stringManager, lineEditFactory);
-        treeView->setFactoryForManager(enumManager, comboBoxFactory);
-        treeView->setFactoryForManager(doubleManager, doubleSpinFactory);
-        treeView->setFactoryForManager(subBoolManager, checkBoxFactory);
+        treeView->setFactoryForManager(boolManager.get(), checkBoxFactory.get());
+        treeView->setFactoryForManager(intManager.get(), spinBoxFactory.get());
+        treeView->setFactoryForManager(stringManager.get(), lineEditFactory.get());
+        treeView->setFactoryForManager(enumManager.get(), comboBoxFactory.get());
+        treeView->setFactoryForManager(doubleManager.get(), doubleSpinFactory.get());
+        treeView->setFactoryForManager(subBoolManager.get(), checkBoxFactory.get());
 
         treeView->addProperty(top);
         treeView->setGeometry(10,20,this->width()-20,this->height()-30);
@@ -181,7 +181,7 @@ config::config(QDialog *parent,marray** _arr, unsigned int *_size)
         treeView->show();
 
         int i=0;
-        if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
+        if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, nullptr, &alldevs, errbuf) == -1)
            {
                return;
            }
@@ -265,8 +265,8 @@ unsigned short config::double2fixed(double val, unsigned int N, unsigned int Q)
   integer = abs(val);               //целая часть числа
   mask = integer << Q;              //двигается на количество бит дробной части
   result+=mask;                     //записываем в результат
-  result = result << 16-N+1;
-  result = result >> 16-N+1;        //очистка знака
+  result = result << (16-N+1);
+  result = result >> (16-N+1);        //очистка знака
   double frac = abs(val)-integer;   //дробь
   mask = 1;
   mask = mask << Q;                 //что такое 1 в этой системе счисления
@@ -304,9 +304,9 @@ int i;
                                                            // 65536 guarantees that the whole packet will be captured on all the link layers
                                          PCAP_OPENFLAG_PROMISCUOUS,    // promiscuous mode
                                          1000,             // read timeout
-                                         NULL,             // authentication on the remote machine
+                                         nullptr,             // authentication on the remote machine
                                          errbuf            // error buffer
-                                         ) ) == NULL)
+                                         ) ) == nullptr)
                {
                    //fprintf(stderr,"\nUnable to open the adapter. %s is not supported by WinPcap\n", d->name);
                    /* Free the device list */
@@ -318,7 +318,7 @@ int i;
                //msgBox.setText(QString::fromStdString(descr));
                //msgBox.exec();
                file = fopen( stringManager->value(fileName).toStdString().c_str(), "rb" );
-               if ( file == NULL) {
+               if ( file == nullptr) {
                      //printf("\nCould not open file");
                    }
                  else {

@@ -30,7 +30,7 @@ public:
 
 	~ioWork()
 	{
-	//	inf = NULL;
+	//	inf = nullptr;
 	}
 	void Do()
 	{
@@ -109,9 +109,9 @@ private:
 	QDateTime oldTime;
 	float oldCount;
 	float AverageSpeed;
-	QDialog * dlg;
-	spectrumWidget *sw;
-	QTimer *sptime;
+	std::shared_ptr<QDialog> dlg;
+	std::shared_ptr<spectrumWidget> sw;
+	//QTimer *sptime;
 
 
 };

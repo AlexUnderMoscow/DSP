@@ -2,7 +2,9 @@
 
 fifo::fifo(unsigned int size)
 {
-	buf = new char[size];
+        buf = std::shared_ptr<std::vector<char>>(new std::vector<char>);    //buf = std::make_shared<char*>(new char[size]);
+        buf->resize(size);
+        buffer = buf->data();                                                      //buffer = (void*)&((*buf)[0]);
 	bufSize = size;
 	readIndex = 0;
 	writeIndex = 0;
@@ -23,14 +25,7 @@ void fifo::setData()
 	loadBuf = 0;
 }
 
-void fifo::deleteBuf()
-{
-	if (buf!=NULL)	
-	{
-		delete [] buf;
-		buf = NULL;
-	}
-}
+
 unsigned int fifo::write(char* _buf, unsigned int len)
 {
 	critical.lock();
@@ -47,15 +42,15 @@ unsigned int fifo::write(char* _buf, unsigned int len)
 
 	if ((writeIndex+len) <= bufSize) // обычная запись
 	{
-		memcpy(buf+writeIndex,_buf,len);
+		memcpy(buffer+writeIndex,_buf,len);
 		writeIndex+=len;
 		dataSize+=len;
 	}
 	else  //запись через размер циклического буфера
 	{
 		int tmp = len-bufSize+writeIndex;
-		memcpy(buf+writeIndex,_buf,bufSize - writeIndex);
-		memcpy(buf,_buf+bufSize - writeIndex,tmp);
+		memcpy(buffer+writeIndex,_buf,bufSize - writeIndex);
+		memcpy(buffer,_buf+bufSize - writeIndex,tmp);
 		writeIndex = tmp;
 		dataSize+=len;
 	}	
@@ -78,15 +73,15 @@ unsigned int fifo::read(char* _buf, unsigned int len)
 
 	if ((readIndex+len)<=bufSize) /*обычное считываение*/
 	{
-		memcpy(_buf,buf+readIndex,len);
+		memcpy(_buf,buffer+readIndex,len);
 		readIndex+=len;
 		dataSize-=len;
 	}
 	else /*считываение через границу циклического буфера*/
 	{
 		int tmp = len-bufSize+readIndex;
-		memcpy(_buf,buf+readIndex,bufSize - readIndex);
-		memcpy(_buf+bufSize-readIndex,buf,tmp);
+		memcpy(_buf,buffer+readIndex,bufSize - readIndex);
+		memcpy(_buf+bufSize-readIndex,buffer,tmp);
 		readIndex=tmp;
 		dataSize-=len;
 	}

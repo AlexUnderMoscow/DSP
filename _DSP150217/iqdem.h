@@ -156,7 +156,7 @@ for (int j = 0; j<readBlock;j++)
 			{ //переход с минуса на плюс - берем отсчет и запоминиаем
 				//*(shco+i) = (short)*(co+i);
 				symCount++;
-				if (*pdw!=NULL)
+				if (*pdw!=nullptr)
 				{
 					(*pdw)->addSample((short)*(co+i),(short)*(si+i));
 				}

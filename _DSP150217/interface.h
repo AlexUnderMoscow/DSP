@@ -49,9 +49,9 @@ public:
 	QString moduleName;				//имя модуля
 	unsigned short blockID;				//ID блока
 	moduleType type;				//тип модуля
-	QVector<Arrow *> arrows;			//список стрелок
-	std::vector<fifo*> input;			//список буферов входных
-	std::vector<fifo*> output;			//список буферов выходных
+	QVector<Arrow*> arrows;				//список стрелок
+	std::vector<std::shared_ptr<fifo>> input;	//список буферов входных
+	std::vector<std::shared_ptr<fifo>> output;	//список буферов выходных
 	void sortArrows();				//упорядочить буфера (вход/выход)
 	void removeArrow(Arrow *arrow);
 	void removeArrows();
@@ -69,37 +69,37 @@ public:
 	bool ready;						//готовность данных
 	void * widgetAddr;					//адрес  обработчика
 	QString error;
-	QToolButton *show;
+	std::shared_ptr<QToolButton> show;
 	QDialog *form;
 	QPixmap MODpixmap;
-	QPushButton * le;
+	std::shared_ptr<QPushButton> le;
 	QTimer *timer;
 
 	marray** arr;
 	unsigned int *size;
 /*------------------------------------------------------*/
 
-	QtBoolPropertyManager *boolManager;
-	QtIntPropertyManager *intManager;
-	QtStringPropertyManager *stringManager;
-	QtSizePropertyManager *sizeManager;
-	QtRectPropertyManager *rectManager;
-	QtSizePolicyPropertyManager *sizePolicyManager;
-	QtEnumPropertyManager *enumManager;
-	QtGroupPropertyManager *groupManager;
-	QtDoublePropertyManager *doubleManager;
-	QtFlagPropertyManager *flagManager;
-	QtBoolPropertyManager *subBoolManager;
+	std::shared_ptr<QtBoolPropertyManager> boolManager;
+	std::shared_ptr<QtIntPropertyManager> intManager;
+	std::shared_ptr<QtStringPropertyManager> stringManager;
+	std::shared_ptr<QtSizePropertyManager> sizeManager;
+	std::shared_ptr<QtRectPropertyManager> rectManager;
+	std::shared_ptr<QtSizePolicyPropertyManager> sizePolicyManager;
+	std::shared_ptr<QtEnumPropertyManager> enumManager;
+	std::shared_ptr<QtGroupPropertyManager> groupManager;
+	std::shared_ptr<QtDoublePropertyManager> doubleManager;
+	std::shared_ptr<QtFlagPropertyManager> flagManager;
+	std::shared_ptr<QtBoolPropertyManager> subBoolManager;
 
-	QtTreePropertyBrowser *treeView;
+	std::shared_ptr<QtTreePropertyBrowser> treeView;
 
-	QtCheckBoxFactory *checkBoxFactory;
-	QtSpinBoxFactory *spinBoxFactory;
-	QtSliderFactory *sliderFactory;
-	QtScrollBarFactory *scrollBarFactory;
-	QtLineEditFactory *lineEditFactory;
-	QtEnumEditorFactory *comboBoxFactory;
-	QtDoubleSpinBoxFactory *doubleSpinFactory;
+	std::shared_ptr<QtCheckBoxFactory> checkBoxFactory;
+	std::shared_ptr<QtSpinBoxFactory> spinBoxFactory;
+	std::shared_ptr<QtSliderFactory> sliderFactory;
+	std::shared_ptr<QtScrollBarFactory> scrollBarFactory;
+	std::shared_ptr<QtLineEditFactory> lineEditFactory;
+	std::shared_ptr<QtEnumEditorFactory> comboBoxFactory;
+	std::shared_ptr<QtDoubleSpinBoxFactory> doubleSpinFactory;
 /*------------------------------------------------------*/
 private:
 	bool expand;

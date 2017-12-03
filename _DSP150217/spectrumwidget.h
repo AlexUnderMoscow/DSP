@@ -9,6 +9,7 @@
 #include <QListWidget>
 #include <QVector>
 #include "qcustomplot.h"
+#include "struct.h"
 
 #ifndef M_PI 
 #define M_PI 3.14159265358979323846
@@ -38,8 +39,8 @@ public:
 	int x;
 	int y;
 	int k_zoom;
-	QTimer *time;
-	QCustomPlot *cp;
+	std::shared_ptr<QTimer> time;
+	std::shared_ptr<QCustomPlot> cp;
 protected:
 	//void paintEvent(QPaintEvent *event);
 	vector<double> FFTCalc(const vector<short>& dIn, int nn, int beginData);
@@ -47,6 +48,8 @@ private:
 	QString fileName;
 //	QPainter *painter;
 	QListWidget *list;
+	QVector<double> graphics;
+	QVector<double> xvec;
 private slots:
 	void timeoutRepaint();
 

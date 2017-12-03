@@ -7,7 +7,7 @@ IQdem::IQdem(QDialog *parent, marray** _arr, unsigned int *_size)
 	moduleName = QString::fromUtf8("Квадратурный демодулятор");
 	MODpixmap.load(":/images/4qam.png");
 	type = IQDemodulator;
-	pdw = NULL;
+	pdw = nullptr;
 	work = new iqDemWork((void*)this,&ui, &pdw);
 	widgetAddr = (void*)work;
 	form = this;
@@ -20,8 +20,8 @@ IQdem::IQdem(QDialog *parent, marray** _arr, unsigned int *_size)
 	createButton(this);
 	arr = _arr;
 	size=_size;
-	dlg = NULL;
-	pdw = NULL;
+	dlg = nullptr;
+	pdw = nullptr;
 }
 
 IQdem::~IQdem()
@@ -75,9 +75,9 @@ void IQdem::diagramShow()
 		sptime->stop();
 		dlg->close();
 		delete pdw;
-		pdw = NULL;
+		pdw = nullptr;
 		delete dlg;
-		dlg=NULL;
+		dlg=nullptr;
 
 		delete sptime;
 	}

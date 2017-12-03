@@ -101,7 +101,7 @@ public:
 
 	~configWork()
 	{
-	//	inf = NULL;
+	//	inf = nullptr;
 	}
 	void setparams(FILE *_file,
 		      pcap_t *_fp,

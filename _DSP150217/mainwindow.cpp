@@ -88,9 +88,9 @@ void MainWindow::deleteItem()
 		{
 			Interface *temp = scene->vel.at(index).inter;
 			Interface **t = &temp;
-			th.proc(Delete,scene->vel.at(index).inter->type,NULL,NULL,
-				t,NULL);
-			scene->vel.at(index).inter->widgetAddr=NULL;
+			th.proc(Delete,scene->vel.at(index).inter->type,nullptr,nullptr,
+				t,nullptr);
+			scene->vel.at(index).inter->widgetAddr=nullptr;
 		}
 	}
 	for (int i=0;i<scene->vel.size();i++)
@@ -108,7 +108,7 @@ void MainWindow::pointerGroupClicked(int)
 	if (scene->myMode==DiagramScene::InsertItem)
 	{
 		scene->myMode = DiagramScene::InsertText;
-		scene->start_w=NULL;
+		scene->start_w=nullptr;
 	}
 }
 
@@ -258,7 +258,7 @@ void MainWindow::mainClose()
 void MainWindow::createArray()
 {
 	scene->listSize = scene->vel.size();
-	if (scene->elList != NULL)
+	if (scene->elList != nullptr)
 	{
 		delete [] scene->elList;
 	}
@@ -375,8 +375,8 @@ QWidget *MainWindow::createBackgroundCellWidget(const QString &text,
 QWidget *MainWindow::createCellWidget(const QString &text,moduleType type)
 {
     QPixmap pix;
-    procThread th(NULL,NULL);
-    th.proc(getImage,type,&pix,NULL,NULL,NULL);
+    procThread th(nullptr,nullptr);
+    th.proc(getImage,type,&pix,nullptr,nullptr,nullptr);
     QIcon icon(pix);
     QToolButton *button = new QToolButton;
     button->setIcon(icon);
