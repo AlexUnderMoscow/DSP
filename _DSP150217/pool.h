@@ -63,11 +63,6 @@ public:
 
 	 ~ObjectPool()
 	{
-		// 
-		for (size_t i = 0; i < m_pool.size(); ++i)
-		{
-			// m_pool[i].instance->processStop();
-		}
-		//m_pool.clear();
+
 	}
 };

@@ -1,11 +1,16 @@
 TEMPLATE = app
 TARGET = DSP
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 include(../propertybrowser/qtpropertybrowser.pri)
 
-QMAKE_CXXFLAGS += -std=c++11 -lwpcap
+# install
+target.path = $$PWD/debug
+INSTALLS += target
+
+QMAKE_CXXFLAGS += -pipe -fno-keep-inline-dllexport -g -std=gnu++11 -frtti -Wall -Wextra -fexceptions -mthreads -DUNICODE -DQT_QML_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB  -std=c++11 -lwpcap
 
 INCLUDEPATH += g:/src/WpdPack/Include
 LIBS += -L g:/src/WpdPack/Lib -lwpcap -lpacket -lwsock32
@@ -89,3 +94,5 @@ QT           += widgets
 
 DISTFILES += \
     Makefile
+
+

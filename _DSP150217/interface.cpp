@@ -54,7 +54,6 @@ void Interface::expandForm()
 		le->setEnabled(false);
 		le->setVisible(true);
 		if (treeView!=nullptr) treeView->setVisible(false);
-//		if (indicatorTree!=nullptr) indicatorTree->setVisible(false);
 	}
 	else
 	{
@@ -67,7 +66,6 @@ void Interface::expandForm()
 		show->setText("...");
 		le->setVisible(false);
 		if (treeView!=nullptr) treeView->setVisible(true);
-//		if (indicatorTree!=nullptr) indicatorTree->setVisible(true);
 	}
 }
 void Interface::deleteObject()

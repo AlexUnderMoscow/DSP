@@ -70,7 +70,7 @@ for (int i=0;i<=255;i++)
 
 COperations::~COperations()
 {
-	return;
+
 }
 
 unsigned char COperations::Invert (unsigned char b)

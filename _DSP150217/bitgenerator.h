@@ -52,9 +52,9 @@ public:
 		
 		if (ui->checkData->isChecked())
 		{
-			for (unsigned int i=0;i<dataCount>>4;i++)
+            for (unsigned int i=0;i < (dataCount>>4) ;i++)
 			{
-				for (unsigned int j = 0; j<dataCount>>4;j++)
+                for (unsigned int j = 0; j < (dataCount>>4) ;j++)
 				{
 					buf[size+i*(dataCount>>4)+j] = j+0xF0;
 				}

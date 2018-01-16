@@ -24,7 +24,7 @@ summ::summ(QDialog *parent,marray** _arr, unsigned int *_size)
 
 summ::~summ()
 {
-//		delete timer;
+        delete timer;
 }
 void summ::update()
 {
