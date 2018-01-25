@@ -1,3 +1,4 @@
+//есть идея через шаблон strategy сделать прогрузку разных платформ
 #ifndef CONFIG_H
 #define CONFIG_H
 
@@ -51,6 +52,37 @@
 #include "interface.h"
 #include "ui_config.h"
 
+class Strategy
+{
+public:
+    virtual ~Strategy() {}
+    virtual void use(void) = 0;
+    virtual void payload(void) = 0;
+};
+
+class Marsohod2: public Strategy
+{
+public:
+    void use(void){
+       // std::cout << "Marsohod2" << std::endl;
+    }
+    void payload(void){
+
+    }
+};
+
+class Cyclone4_115: public Strategy
+{
+public:
+    void use(void){
+        //std::cout << "Cyclone4_115" << std::endl;
+    }
+    void payload(void){
+
+    }
+};
+
+
 struct header{
   char macdst[6];
   char macsrc[6];
@@ -71,7 +103,9 @@ struct mypacket{
 class configWork
 {
 public:
-	long long dataCounter;
+
+
+    long long dataCounter;
 	unsigned int dataRead;  //по сколько Kбайт считывать
 	Interface *inf;
 
@@ -117,6 +151,7 @@ public:
 	  maxPackCount =  _packCount;
 	}
 
+
 	void Do()
 	{
 		if (packCount!=0)
@@ -155,29 +190,34 @@ class config : public Interface
 	Q_OBJECT
 public:
    config(QDialog *parent,marray** _arr, unsigned int *_size);
+   void setStrategy(Strategy* s)
+   {
+       platform = s;
+   }
         ~config();
         configWork * work;
+        Strategy* platform;
 
 	QtProperty *top;
-	QtProperty *fileName;		//путь к файлу для обработки
+    QtProperty *fileName;           //путь к файлу для обработки
 	QtProperty *IntPercentFileLoad;	//процент отправки файла
-	QtProperty *bLoadConf;		//старт загрузки параметров
-	QtProperty *flagitem;		//рег 1 общее управление
-	QtProperty *lampFlags;		//рег.1
-	QtProperty *IntFreq;		//частота в герцах 4 000 000 Гц рег.2-3
-	QtProperty *IntFreq2;		//частота в герцах 4 000 000 Гц рег.11-12
-	QtProperty *IntCurrentFreq;	//мгновенная частота (с внутреннего регистра)
-	QtProperty *fKuFreq;		//коэффициент усиления в петле частоты рег.4
-	QtProperty *fKuPhase;		//коэффициент усиления в петле фазы рег.5
+    QtProperty *bLoadConf;          //старт загрузки параметров
+    QtProperty *flagitem;           //рег 1 общее управление
+    QtProperty *lampFlags;          //рег.1
+    QtProperty *IntFreq;            //частота в герцах 4 000 000 Гц рег.2-3
+    QtProperty *IntFreq2;           //частота в герцах 4 000 000 Гц рег.11-12
+    QtProperty *IntCurrentFreq;     //мгновенная частота (с внутреннего регистра)
+    QtProperty *fKuFreq;            //коэффициент усиления в петле частоты рег.4
+    QtProperty *fKuPhase;           //коэффициент усиления в петле фазы рег.5
 	QtProperty *enumFilterBandPass;	//выбор полосы пропускания фильтра
-	QtProperty *enumEthDevice;	//выбор инерфейса
-	QtProperty *IntClkFreq;		//символьная скорость генератора  рег.15-16
-	QtProperty *IntClkFreqRecv;	//символьная скорость приемника  рег.9-10
-	QtProperty *fKuSymbSpeed;	//коэффициент усиления в петле символьной скорости рег.
-	QtProperty *fKuCLK;		//коэффициент усиления в петле тактов рег.
-	QtProperty *fAruRef;		//опорное значение АРУ рег.19
-	QtProperty *fAruAmp;		//коэффициент усиления в петле АРУ рег.20
-	QtProperty *fAruAcc;		//предустановка аккумулятора АРУ рег.18
+    QtProperty *enumEthDevice;      //выбор инерфейса
+    QtProperty *IntClkFreq;         //символьная скорость генератора  рег.15-16
+    QtProperty *IntClkFreqRecv;     //символьная скорость приемника  рег.9-10
+    QtProperty *fKuSymbSpeed;       //коэффициент усиления в петле символьной скорости рег.
+    QtProperty *fKuCLK;             //коэффициент усиления в петле тактов рег.
+    QtProperty *fAruRef;            //опорное значение АРУ рег.19
+    QtProperty *fAruAmp;            //коэффициент усиления в петле АРУ рег.20
+    QtProperty *fAruAcc;            //предустановка аккумулятора АРУ рег.18
 
 
 	/**/

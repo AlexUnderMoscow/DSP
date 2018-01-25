@@ -2,9 +2,9 @@
 
 fifo::fifo(unsigned int size)
 {
-        buf = std::shared_ptr<std::vector<char>>(new std::vector<char>);    //buf = std::make_shared<char*>(new char[size]);
-        buf->resize(size);
-        buffer = buf->data();                                                      //buffer = (void*)&((*buf)[0]);
+    buf = std::shared_ptr<std::vector<char>>(new std::vector<char>);    //buf = std::make_shared<char*>(new char[size]);
+    buf->resize(size);
+    buffer = buf->data();                                                      //buffer = (void*)&((*buf)[0]);
 	bufSize = size;
 	readIndex = 0;
 	writeIndex = 0;
